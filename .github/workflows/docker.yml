@@ -1,4 +1,4 @@
-name: Build and Push Multi-Arch Docker Images
+name: 构建并推送到多端的docker镜像
 
 on:
   push:
