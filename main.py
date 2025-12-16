@@ -11,7 +11,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.utils import formataddr, formatdate, make_msgid
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Union
 
@@ -5411,6 +5411,22 @@ class NewsAnalyzer:
             print(f"分析流程执行出错: {e}")
             raise
 
+def init():
+    path = Path(__file__).parent.resolve()
+    
+    # path指定去往子目录
+    path = path.joinpath('output')
+    
+    # 列出当前目录下的所有目录
+    for item in path.iterdir():
+        if '年' in item.name:
+            # 将目录'xxxx年xx月xx日'转换为时间对象
+            date_obj = datetime.strptime(item.name, '%Y年%m月%d日')
+            # 判断这个时间对象，如果早于三天前，就将这个目录强制删除
+            if date_obj < datetime.now() - timedelta(days=3):
+                # 强制删除
+                os.system(f'rm -rf {item}')
+
 
 def main():
     try:
@@ -5428,4 +5444,5 @@ def main():
 
 
 if __name__ == "__main__":
+    init()
     main()
