@@ -5423,7 +5423,7 @@ def init():
             # 将目录'xxxx年xx月xx日'转换为时间对象
             date_obj = datetime.strptime(item.name, '%Y年%m月%d日')
             # 判断这个时间对象，如果早于三天前，就将这个目录强制删除
-            if date_obj < datetime.now() - timedelta(days=3):
+            if date_obj < datetime.now() - timedelta(days=2):
                 # 强制删除
                 os.system(f'rm -rf {item}')
 
