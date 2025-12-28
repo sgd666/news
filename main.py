@@ -5428,13 +5428,14 @@ def init():
                 os.system(f'rm -rf {item}')
 
     # 每次去检测部署的cf workers/pages状态，顺便增加点请求数，免得被认为长期没流量销毁
-    try:
-        response = requests.get('https://proxy-exu.pages.dev/')
-        print(f"cloudflare pages request status code: {response.status_code}")
-    except Exception as e:
-        print(f"cloudflare pages request faild, reason: {e}")
-    finally:
-        pass
+    for u in ['https://proxy-exu.pages.dev/', 'https://www.pentaq.de5.net/', 'https://www.soda.de5.net/']
+        try:
+            response = requests.get(u)
+            print(f"cloudflare page {u} request status code: {response.status_code}")
+        except Exception as e:
+            print(f"cloudflare page {u} request faild, reason: {e}")
+        finally:
+            pass
 
 
 def main():
