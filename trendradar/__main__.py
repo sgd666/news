@@ -1822,5 +1822,14 @@ def _handle_status_commands(config: Dict, args) -> None:
     ctx.cleanup()
 
 
+def check_cf_domain():
+    for domain in ['https://proxy-exu.pages.dev/', 'https://www.pentaq.de5.net/', 'https://www.soda.de5.net/']:
+        try:
+            response = requests.get(domain, timeout=10)
+            print(f"cloudflare page {domain} request status code: {response.status_code}")
+        except Exception as e:
+            print(f"cloudflare page {domain} request faild, reason: {e}")
+
+
 if __name__ == "__main__":
     main()
