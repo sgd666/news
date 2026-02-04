@@ -131,9 +131,7 @@ jobs:
           S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
           S3_REGION: ${{ secrets.S3_REGION }}
           GITHUB_ACTIONS: true
-        run: |
-          python -m trendradar
-          find . -type d -name "__pycache__" -exec rm -rf {} +
+        run: python -m trendradar
 
       - name: Commit and push if changes
         env:
@@ -141,6 +139,8 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
+
+          git rm -r --cached __pycache__
           
           git add -A
           
