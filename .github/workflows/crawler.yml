@@ -141,6 +141,7 @@ jobs:
           git config --global user.email 'actions@github.com'
           
           git add -A
+          git rm -r --cache "**/__pycache__"
           
           if git diff --quiet && git diff --staged --quiet; then
             echo "📭 No changes to commit"
